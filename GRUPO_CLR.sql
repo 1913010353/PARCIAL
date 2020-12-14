@@ -1,0 +1,927 @@
+CREATE TABLE TIPO_CLIENTE(
+  IDTIPOCLIENTO NUMBER PRIMARY KEY,
+  NOMBRETIPOCLIENTE VARCHAR2(50)
+);
+CREATE SEQUENCE SQ_TIPO_CLIENTE
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+--------------------------------------------
+CREATE TABLE TIPOEMPLEADO(
+IDTIPOEMPLEADO  NUMBER PRIMARY KEY,
+nombretipoempleado      VARCHAR2(50)
+);
+CREATE SEQUENCE SQ_TIPOEMPLEADO
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+
+--------------------------------------------
+CREATE TABLE TIPOCOMIDA(
+IDTIPOCOMIDA  NUMBER PRIMARY KEY,
+nombretipocomida     VARCHAR2(50)
+);
+CREATE SEQUENCE SQ_TIPOCOMIDA
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+---------------------------
+CREATE TABLE CLIENTE(
+  IDCLIENTE NUMBER PRIMARY KEY,
+  NOMBRECLIENTE VARCHAR2(50),
+  APELLIDOCLIENTE VARCHAR2(50),
+  SEXOCLIENTE  VARCHAR2(2),
+  DIRECCIONCLIENTE  VARCHAR2(80),
+  TELEFONOCLIENTE  VARCHAR2(20),
+  IDTIPOCLIENTE NUMBER REFERENCES TIPO_CLIENTE
+);
+CREATE SEQUENCE SQ_CLIENTE
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+------------------------------------
+CREATE TABLE EMPLEADO(
+IDEMPLEADO  NUMBER PRIMARY KEY,
+nombre      VARCHAR2(50),
+apellido     VARCHAR2(50),
+sexo       VARCHAR2(2),
+direccion    VARCHAR2(80),
+telefono  VARCHAR2(20), 
+clave      VARCHAR2(5),
+IDTIPOEMPLEADO  NUMBER REFERENCES TIPOEMPLEADO
+);
+CREATE SEQUENCE SQ_EMPLEADO
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+----------------------------
+CREATE TABLE COMIDA(
+  IDCOMIDA NUMBER PRIMARY KEY,
+  NOMBRECOMIDA VARCHAR2(50),
+  DESCRIPCIONCOMIDA VARCHAR2(50),
+  PRECIOCOMIDA  NUMBER ,
+  IDTIPOCOMIDA NUMBER REFERENCES TIPOCOMIDA
+);
+CREATE SEQUENCE SQ_COMIDA
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+-----------------------------------------------
+CREATE TABLE VENTA(
+IDVENTA  NUMBER PRIMARY KEY,
+fecha      DATE,
+totalventa  NUMBER,
+IDEMPLEADO  NUMBER REFERENCES EMPLEADO,
+IDCLIENTE  NUMBER REFERENCES CLIENTE
+);
+CREATE SEQUENCE SQ_VENTA
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+--------------------------
+CREATE TABLE DETALLE_VENTA(
+  IDDETALLEVENTA NUMBER PRIMARY KEY,
+  CANTIDADVENTA NUMBER,
+  IMPORTEVENTA NUMBER,
+  IDVENTA NUMBER REFERENCES VENTA,
+  IDCOMIDA NUMBER REFERENCES COMIDA
+);
+CREATE SEQUENCE SQ_DETALLE_VENTA
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
+SELECT
+    *
+FROM
+    tab;
+COMMIT;
+
+
+--------TIPOS------------------
+INSERT INTO TIPO_CLIENTE VALUES(
+  SQ_TIPO_CLIENTE.NEXTVAL,
+  'NUEVO'
+);
+INSERT INTO TIPO_CLIENTE VALUES (
+  SQ_TIPO_CLIENTE.NEXTVAL,
+  'RECURENTE'
+);
+
+INSERT INTO TIPOEMPLEADO VALUES (
+    SQ_TIPOEMPLEADO.NEXTVAL,
+    'MEDIO TIEMPO'   
+);
+
+INSERT INTO TIPOEMPLEADO VALUES (
+    SQ_TIPOEMPLEADO.NEXTVAL,
+    'TIEMPO COMPLETO'   
+);
+
+INSERT INTO TIPOCOMIDA VALUES (
+    SQ_TIPOCOMIDA.NEXTVAL,
+    'Premiun'
+);
+
+INSERT INTO TIPOCOMIDA VALUES (
+    SQ_TIPOCOMIDA.NEXTVAL,
+    'No Premiun'
+);
+-----------CLIENTE---------------
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'FABIAN',
+  'GRANADOS',
+  'M',
+  'luceroaccostupa19@gmail.com',
+  '982945361',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'OSCAR',
+  'ORTIZ DE ZARATE',
+  'M',
+  'rosayala408@gmail.com',
+  '958245369',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'HENRY',
+  'PASCUAL',
+  'M',
+  'julians@hotmail.com',
+  '936254266',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'LUCIA',
+  'CASTILLO',
+  'F',
+  'gerardo@hotmail.com',
+  '548269325',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'EDGAR',
+  'IGLESIAS',
+  'M',
+  'juditha805@gmail.com',
+  '960902434',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'MARCO',
+  'UGARTE',
+  'M',
+  'angelp@gmail.com',
+  '925210814',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'FIORELLA',
+  'CALLOHUANCA',
+  'F',
+  'andy@gmail.com',
+  '950361345',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ELBA',
+  'MOHAMED',
+  'F',
+  'henrscochinchay@gmail.com',
+  '937353700',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'CRISTIAN',
+  'AHMED',
+  'M',
+  'gncrlsz@gmail.com',
+  '963163469',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'FLORENTINO',
+  'GARCIA',
+  'M',
+  'josechavez@gmail.com',
+  '947336081',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'Didier',
+  'ABDESELAM',
+  'M',
+  'abeo_98@hotmail.com',
+  '970188051',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'NORA',
+  'SANCHEZ',
+  'F',
+  'james2@gmail.com',
+  '922674226',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'KATHERINE',
+  'RODRIGUEZ',
+  'F',
+  'julio@hotmail.com',
+  '928786858',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'OLGA',
+  'GONZALEZ',
+  'F',
+  'steve1997@hotmail.com',
+  '920758117',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'JHONATAN',
+  'PEREZ',
+  'M',
+  'lgk90@gmail.com',
+  '912289365',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'AGUSTIN',
+  'LOPEZ',
+  'M',
+  'brh@hotmail.com',
+  '996899439',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'MARITZA',
+  'FERNANDEZ',
+  'F',
+  'me78@gmail.com',
+  '940361316',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'Ruth',
+  'ABDELKADER',
+  'F',
+  'kevi@gmail.com',
+  '945702533',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'CESAR',
+  'RUIZ',
+  'M',
+  'peba@hotmail.com',
+  '967068663',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'JUAN',
+  'MARTIN',
+  'M',
+  'giancoicca@gmail.com',
+  '953691441',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'VICTOR',
+  'JIMENEZ',
+  'M',
+  'cin7@gmail.com',
+  '936932616',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'HIDALFO',
+  'GOMEZ',
+  'M',
+  'hidalgo7@gmail.com',
+  '981816593',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'LENIN',
+  'MARTINEZ',
+  'M',
+  'richa15@gmail.com',
+  '923996854',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'CLELIA',
+  'ALI',
+  'F',
+  'jke9@hotmail.com',
+  '966718872',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'RONI',
+  'MUÑOZ',
+  'M',
+  'esma@gmail.com',
+  '971881120',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'Edson',
+  'MUSTAFA',
+  'M',
+  'mfavio@gmail.com',
+  '954263698',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ESPERANZA',
+  'ABDEL LAH',
+  'F',
+  'flaez2000@hotmail.com',
+  '960272882',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'FREDDY',
+  'AMAR',
+  'M',
+  'sh5@outlook.es',
+  '998590604',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'VALERIANO',
+  'HERNANDEZ',
+  'M',
+  'narvan@hotmail.com',
+  '977172051',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ROQUE',
+  'RAMIREZ',
+  'M',
+  'ax_rcsdc6@hotmail.com',
+  '972922044',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'JOSE',
+  'DOMINGUEZ',
+  'M',
+  'giuen@gmail.com',
+  '980928966',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'PEDRO',
+  'VAZQUEZ',
+  'M',
+  'juliaacruz@gmail.com',
+  '987436596',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'EDUARDO',
+  'ALVAREZ',
+  'M',
+  'luisavia7@gmail.com',
+  '950619776',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'LUZ',
+  'CASTILLO',
+  'F',
+  'eli7s8@hotmail.com',
+  '993610777',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'LADIMIR',
+  'BENITEZ',
+  'M',
+  'juan302@gmail.com',
+  '902844819',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ROSALIA',
+  'LAARBI',
+  'M',
+  'rosalia@hotmail.com',
+  '943427754',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ODALY',
+  'BLANCO',
+  'F',
+  'odalia_45@gmail.com',
+  '934832052',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ERNESTO',
+  'TORRES',
+  'M',
+  'ernesto@hotmail.com',
+  '918986476',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'LIZET',
+  'ROMAN',
+  'F',
+  'lizbethn_45@gmail.com',
+  '972102589',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'JONATHAN',
+  'RIOS',
+  'M',
+  'jonatham@hotmail.com',
+  '985126439',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'Martin',
+  'MOLINA',
+  'M',
+  'martin5@gmail.com',
+  '964758123',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'SALOMON',
+  'MARQUEZ',
+  'M',
+  'salomom453@hotmail.com',
+  '942658137',
+  1
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'ZULEMA',
+  'DRIS',
+  'M',
+  'zulema1562@gmail.com',
+  '978546213',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'CLEOVER',
+  'HOSSAIN',
+  'M',
+  'cleover@hotmail.com',
+  '945687124',
+  2
+);
+INSERT INTO CLIENTE VALUES(
+  SQ_CLIENTE,
+  'EDWAR',
+  'RAMOS',
+  'M',
+  'edwar152@gmail.com',
+  '954263458',
+  1
+);
+------------EMPLEADO------------
+
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'FABIAN',
+    'GRANADOS',
+    'M',
+   'luceroaccostupa19@gmail.com',
+    '982945361',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'LLUN',
+    'GARCIA',
+    'F',
+   'MARIA123@gmail.com',
+    '934832152',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'MARIA',
+    'GARCIA',
+    'F',
+   'MARIA123@gmail.com',
+    '934832152',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'YULIANA',
+    'GONZALEZ',
+    'F',
+   'YULIANA1234@gmail.com',
+    '972127859',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'Joan',
+    'MARTINEZ',
+    'M',
+   'Joan1523@gmail.com',
+    '985121587',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'ERASMO',
+    'LOPEZ',
+    'M',
+   'ERASMO11223@gmail.com',
+    '942658156',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'JOSEPH ',
+    'RODRIGUEZ',
+    'M',
+   'JOSEPH123@gmail.com',
+    '985463698',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'PERCY',
+    'SANCHEZ',
+    'M',
+   'PERCY123@gmail.com',
+    '945871524',
+    '123',
+    1
+);
+
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'RENZO',
+    'MARTIN',
+    'M',
+   'RENZO12345@gmail.com',
+    '954217852',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'VELI',
+    'GOMEZ',
+    'F',
+   'VELI12345@gmail.com',
+    '903613478',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'GILMER',
+    'JIMENEZ',
+    'M',
+   'GILMER12345@gmail.com',
+    '951235746',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'RICARDO',
+    'RUIZ',
+    'M',
+   'RICARDO12345@gmail.com',
+    '945745216',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'LUIS',
+    'ALONSO',
+    'M',
+   'LUIS1234@gmail.com',
+    '961528663',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'DIANA',
+    'HERNANDEZ',
+    'F',
+   'DIANA12345@gmail.com',
+    '963481441',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'YUJAN',
+    'DIAZ',
+    'F',
+   'YUJAN125@gmail.com',
+    '931523616',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'ALEX',
+    'GUTIERREZ',
+    'M',
+   'ALEX125@gmail.com',
+    '931523616',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'NELSON',
+    'ALVAREZ',
+    'M',
+   'NELSON1256@gmail.com',
+    '995596854',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'GLORIA',
+    'MORENO',
+    'F',
+   'GLORIA125@gmail.com',
+    '966778872',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'DENNIS',
+    'MUÑOZ',
+    'F',
+   'DENNIS127@gmail.com',
+    '123654789',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'Fernando',
+    'BLANCO',
+    'M',
+   'Fernando123412125@gmail.com',
+    '987456321',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'ALEXIS',
+    'GIL',
+    'M',
+   'ALEXIS123@gmail.com',
+    '152364789',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'ADELA',
+    'AGUIRRE',
+    'F',
+   'ADELA456@gmail.com',
+    '963214785',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'ROSS',
+    'DIEZ',
+    'F',
+   'ROSS678@gmail.com',
+    '985236147',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'ALEJANDRO',
+    'SALAZAR',
+    'M',
+   'ALEJANDRO0789@gmail.com',
+    '963842571',
+    '123',
+    1
+);
+
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'DANIEL',
+    'RAMOS',
+    'M',
+   'DANIEL965@gmail.com',
+    '987412563',
+    '123',
+    2
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'BEATRIZ',
+    'DOMINGUEZ',
+    'F',
+   'BEATRIZ346@gmail.com',
+    '974125635',
+    '123',
+    1
+);
+INSERT INTO EMPLEADO VALUES(
+    SQ_EMPLEADO,
+    'YUBER',
+    'ORTIZ',
+    'M',
+   'YUBER745@gmail.com',
+    '951235746',
+    '123',
+    1
+);
+-------------COMIDA-------------
+INSERT INTO COMIDA VALUES(
+  SQ_COMIDA,
+  'PAPA RELLENA',
+  'COMIDA CALIDA',
+  5,
+  1
+);
+INSERT INTO COMIDA VALUES(
+  SQ_COMIDA,
+  'CEVICHE',
+  'COMIDA FRIA',
+  10,
+  2
+);
+INSERT INTO COMIDA VALUES(
+  SQ_COMIDA,
+  'PIZZA',
+  'COMIDA CALIDA',
+  15,
+  1
+);
+INSERT INTO COMIDA VALUES(
+  SQ_COMIDA,
+  'POLLO A LA BRASA',
+  'COMIDA CALIDA',
+  20,
+  2
+);
+-------------DETALLE DE VENTA---------------------
+
+----------------VENTAS--------------
+INSERT INTO VENTA VALUES(
+  1,
+  12/05/20,
+  5,
+  1,
+  1
+);
+INSERT INTO VENTA VALUES(
+  2,
+  17/07/20,
+  5,
+  2,
+  2
+);
+INSERT INTO VENTA VALUES(
+  3,
+  15/08/20,
+  8,
+  3,
+  3
+);
+INSERT INTO VENTA VALUES(
+  4,
+  24/06/20,
+  15,
+  4,
+  4
+);
+INSERT INTO VENTA VALUES(
+  5,
+  14/05/20,
+  12,
+  5,
+  5
+);
+INSERT INTO VENTA VALUES(
+  6,
+  12/05/20,
+  5,
+  6,
+  6
+);
+INSERT INTO VENTA VALUES(
+  7,
+  17/05/20,
+  6,
+  7,
+  7
+);
+INSERT INTO VENTA VALUES(
+  8,
+  15/09/20,
+  8,
+  8,
+  8
+);
+INSERT INTO VENTA VALUES(
+  9,
+  24/05/20,
+  15,
+  9,
+  9
+);
+INSERT INTO VENTA VALUES(
+  10,
+  24/05/20,
+  15,
+  10,
+  10
+);
+INSERT INTO VENTA VALUES(
+  11,
+  24/06/20,
+  15,
+  11,
+  11
+);
+
+
